@@ -13,6 +13,8 @@ func main() {
 		log.Fatal("logger", err)
 	}
 
+	logger.Info("starting")
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		u := *r.URL
@@ -29,5 +31,6 @@ func main() {
 		)
 	})
 
+	logger.Info("listening on :8080")
 	logger.Fatal("serve", zap.Error(http.ListenAndServe(":8080", mux)))
 }
