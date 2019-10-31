@@ -16,6 +16,11 @@ func main() {
 	logger.Info("starting")
 
 	mux := http.NewServeMux()
+
+	mux.HandleFunc("/-/health", func(w http.ResponseWriter, r *http.Request) {
+		http.Error(w, "OK", http.StatusOK)
+	})
+
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		u := *r.URL
 		u.Scheme = "https"
